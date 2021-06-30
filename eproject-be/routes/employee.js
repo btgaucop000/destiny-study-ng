@@ -14,6 +14,7 @@ router.post('/', async (req, res, next) => {
     employee.phone = param.phone,
     employee.image = employee.gravatar();
     employee.status = param.status
+    employee.role = param.role
 
     try {
         employee = await employee.save();

@@ -9,6 +9,7 @@ const EmployeeSchema = new Schema({
     zone: String,
     image: String,
     phone: String,
+    role: { type: String, default: 'Employee' },
     enrollDate: { type: Date, default: Date.now },
     status: { type: String, default: 'Working' }
 })
