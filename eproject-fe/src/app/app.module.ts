@@ -11,13 +11,15 @@ import { EmployeeAddComponent } from './components/employee-add/employee-add.com
 import { RestApiService } from './services/rest-api.service';
 import { DataService } from './services/data.service';
 import { HomeComponent } from './components/home/home.component';
+import { EmployeeListComponent } from './components/employee-list/employee-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MessageComponent,
     EmployeeAddComponent,
-    HomeComponent
+    HomeComponent, 
+    EmployeeListComponent
   ],
   imports: [
     BrowserModule,

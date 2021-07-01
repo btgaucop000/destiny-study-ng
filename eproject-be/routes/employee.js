@@ -37,4 +37,21 @@ router.post('/', async (req, res, next) => {
     }
 })
 
+router.get('/', async (req, res, next) => {
+    const employees = await Employee.find().select('-password');
+
+    if(!employees) {
+        return res.status(404).json({
+            success: false,
+            message: 'No employee found!',
+        })
+    }
+
+    res.json({
+        success: true,
+        employees: employees
+    })
+
+})
+
 module.exports = router;
