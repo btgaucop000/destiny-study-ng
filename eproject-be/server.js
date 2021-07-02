@@ -12,7 +12,7 @@ mongoose.connect(config.DATABASE_CONNECT_URL, err => {
     if(err) {
         console.log(err);
     } else {
-        console.log('Connect successful');
+        console.log('Connect database successful');
     }
 })
 
@@ -25,5 +25,5 @@ app.options('*', cors());
 app.use(`${config.API}/accounts`, employeeRoutes);
 
 app.listen(config.PORT, err => {
-    console.log('Something happen on port ' + config.PORT);
+    console.log('Listen on port ' + config.PORT);
 })

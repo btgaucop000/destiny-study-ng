@@ -27,7 +27,9 @@
                 <td>{{ item.email }}</td>
                 <td>{{ item.role }}</td>
                 <td>
-                  View Edit Delete
+                  View
+                  <a [routerLink]="['/employee-edit/' + item._id]" >Edit</a> 
+                  Delete
                 </td>
               </tr>
             </tbody>
