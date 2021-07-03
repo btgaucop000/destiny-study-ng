@@ -21,7 +21,7 @@
                   aria-describedby="nameHid"
                   placeholder="Name"
                 />
-                <small id="nameHid" class="form-text text-muted"
+                <small *ngIf="false" id="nameHid" class="form-text text-muted"
                   >Name is required</small
                 >
               </div>
@@ -36,7 +36,7 @@
                   aria-describedby="emailHid"
                   placeholder="Email"
                 />
-                <small id="emailHid" class="form-text text-muted"
+                <small *ngIf="false" id="emailHid" class="form-text text-muted"
                   >Email is required</small
                 >
               </div>
@@ -51,7 +51,7 @@
                   aria-describedby="pwdHid"
                   placeholder="Password"
                 />
-                <small id="pwdHid" class="form-text text-muted"
+                <small *ngIf="false" id="pwdHid" class="form-text text-muted"
                   >Password is required</small
                 >
               </div>
@@ -66,7 +66,7 @@
                   aria-describedby="phoneHid"
                   placeholder="Phone"
                 />
-                <small id="phoneHid" class="form-text text-muted"
+                <small *ngIf="false" id="phoneHid" class="form-text text-muted"
                   >Phone is required</small
                 >
               </div>
@@ -111,7 +111,7 @@
               </div>
             </div>
             <div class="card-footer text-muted">
-              <button class="btn btn-outline-primary btn-block">Save</button>
+              <button (click)="save()" class="btn btn-outline-primary btn-block">Save</button>
             </div>
           </div>
         </form>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Employee } from 'src/app/models/employee';
 import { DataService } from 'src/app/services/data.service';
 import { RestApiService } from 'src/app/services/rest-api.service';
@@ -13,7 +14,9 @@ export class EmployeeAddComponent implements OnInit {
   btnDisable = false;
   url = 'http://localhost:3030/v1/api/accounts';
 
-  constructor(private rest: RestApiService, private data: DataService) { 
+  constructor(private rest: RestApiService, 
+    private data: DataService,
+    private router: Router) { 
     this.employee = new Employee();
   }
 
@@ -31,6 +34,7 @@ export class EmployeeAddComponent implements OnInit {
       this.rest.post(this.url, this.employee).then(data => {
         this.data.success('Save employee successful');
         this.btnDisable = false;
+        this.router.navigate(['/employee-list']);
       })
       .catch(error => {
         this.data.error(error['message']);

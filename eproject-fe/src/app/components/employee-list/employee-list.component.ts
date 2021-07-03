@@ -25,6 +25,22 @@ export class EmployeeListComponent implements OnInit {
     .catch(error => {
       this.data.error(error['message']);
     })
+
+    setTimeout(() => {
+      this.data.message = '';
+    }, 500);
+  }
+
+  delete(id: string) {
+    this.rest.delete(this.url, id).then((data: any) => {
+      this.data.success(data['message']);
+      setTimeout(() => {
+        this.ngOnInit();
+      }, 500);
+    })
+    .catch(error => {
+      this.data.error(error['message']);
+    })
   }
 
 }
