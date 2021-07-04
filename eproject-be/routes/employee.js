@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const Employee = require('../models/employee');
 const bcrypt = require('bcryptjs');
-const config = require('../config')
+const config = require('../config');
+const jwt = require('jsonwebtoken');
 
 router.post('/', async (req, res, next) => {
     const param = req.body;
@@ -146,6 +147,44 @@ router.get('/get/count', async (req, res, next) => {
         success: true,
         totalEmployees: totalEmployees
     })
+})
+
+router.post('/login', async (req, res, next) => {
+    const param = req.body;
+
+    try {
+        let employee = await Employee.findOne({email: param.email});
+        if(!employee) {
+            return res.status(500).json({
+                success: false,
+                message: 'User does not exist!',
+            })
+        }
+        if(employee && bcrypt.compareSync(param.password, employee.password)) {
+            const token = jwt.sign({
+                employeeId: employee._id
+            }, config.SECRET, {expiresIn: '1d'})
+
+            res.status(200).json({
+                success: true,
+                employee: employee.employeeId,
+                token: token
+            })
+        } else {
+            return res.status(400).json({
+                success: false,
+                message: 'Username or password invalid!',
+            })
+        }
+        
+    } catch (error) {
+        console.log('error >>>', error)
+        return res.status(500).json({
+            success: false,
+            message: 'Something went wrong!',
+            error: error
+        })
+    }
 })
 
 module.exports = router;
