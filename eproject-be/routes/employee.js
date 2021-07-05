@@ -182,7 +182,6 @@ router.post('/login', async (req, res, next) => {
         return res.status(500).json({
             success: false,
             message: 'Something went wrong!',
-            error: error
         })
     }
 })

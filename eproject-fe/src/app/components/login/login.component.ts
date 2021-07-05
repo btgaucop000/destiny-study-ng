@@ -5,14 +5,14 @@ import { DataService } from 'src/app/services/data.service';
 import { RestApiService } from 'src/app/services/rest-api.service';
 
 @Component({
-  selector: 'app-employee-add',
-  templateUrl: './employee-add.component.html',
-  styleUrls: ['./employee-add.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class EmployeeAddComponent implements OnInit {
+export class LoginComponent implements OnInit {
   employee!: Employee;
   btnDisable = false;
-  url = 'http://localhost:3030/v1/api/accounts';
+  url = 'http://localhost:3030/v1/api/accounts/login';
 
   constructor(private rest: RestApiService, 
     private data: DataService,
@@ -27,14 +27,15 @@ export class EmployeeAddComponent implements OnInit {
     return true;
   }
 
-  save(){
+  async login(){
     this.btnDisable = true;
-
     if (this.validate()) {
-      this.rest.post(this.url, this.employee).then(data => {
-        this.data.success('Save employee successful');
+      this.rest.post(this.url, this.employee).then((data: any) => {
+        localStorage.setItem('token', data.token);
+        //await this.data.getProfile();
+        this.data.success('Login successful');
         this.btnDisable = false;
-        this.router.navigate(['/employee-list']);
+        this.router.navigate(['/']);
       })
       .catch(res => {
         this.data.error(res.error['message']);

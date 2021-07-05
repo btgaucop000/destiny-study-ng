@@ -13,6 +13,7 @@ import { DataService } from './services/data.service';
 import { HomeComponent } from './components/home/home.component';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
 import { EmployeeEditComponent } from './components/employee-edit/employee-edit.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { EmployeeEditComponent } from './components/employee-edit/employee-edit.
     EmployeeAddComponent,
     HomeComponent, 
     EmployeeListComponent,
-    EmployeeEditComponent
+    EmployeeEditComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

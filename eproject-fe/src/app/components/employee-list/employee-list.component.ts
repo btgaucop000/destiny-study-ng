@@ -22,8 +22,8 @@ export class EmployeeListComponent implements OnInit {
       this.employees = data.employees
       this.data.success('Get employee successful');
     })
-    .catch(error => {
-      this.data.error(error['message']);
+    .catch(res => {
+      this.data.error(res.error['message']);
     })
 
     setTimeout(() => {
@@ -38,8 +38,8 @@ export class EmployeeListComponent implements OnInit {
         this.ngOnInit();
       }, 500);
     })
-    .catch(error => {
-      this.data.error(error['message']);
+    .catch(res => {
+      this.data.error(res.error['message']);
     })
   }
 

@@ -29,8 +29,8 @@ export class EmployeeEditComponent implements OnInit {
       this.employee = data.employee
       this.data.success('Get employee successful');
     })
-    .catch(error => {
-      this.data.error(error['message']);
+    .catch(res => {
+      this.data.error(res.error['message']);
     })
   }
 
