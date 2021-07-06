@@ -30,12 +30,15 @@ export class LoginComponent implements OnInit {
   async login(){
     this.btnDisable = true;
     if (this.validate()) {
-      this.rest.post(this.url, this.employee).then((data: any) => {
+      this.rest.post(this.url, this.employee).then(async (data: any) => {
         localStorage.setItem('token', data.token);
-        //await this.data.getProfile();
+        await this.data.getProfile(data.employeeId);
         this.data.success('Login successful');
         this.btnDisable = false;
-        this.router.navigate(['/']);
+        this.router.navigate(['/'])
+        .then(() => {
+          window.location.reload();
+        });
       })
       .catch(res => {
         this.data.error(res.error['message']);
@@ -43,4 +46,5 @@ export class LoginComponent implements OnInit {
       })
     }
   }
+  
 }

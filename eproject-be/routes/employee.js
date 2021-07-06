@@ -39,7 +39,7 @@ router.post('/', async (req, res, next) => {
     }
 })
 
-router.get('/', async (req, res, next) => {
+router.get('/', async (req, res) => {
     const employees = await Employee.find().select('-password');
 
     if(!employees) {
@@ -55,7 +55,7 @@ router.get('/', async (req, res, next) => {
     })
 })
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', async (req, res) => {
     const employee = await Employee.findById(req.params.id).select('-password');
 
     if(!employee) {
@@ -71,7 +71,7 @@ router.get('/:id', async (req, res, next) => {
     })
 })
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', async (req, res) => {
     const param = req.body;
     let employee = await Employee.findById(req.params.id);
 
@@ -112,7 +112,7 @@ router.put('/:id', async (req, res, next) => {
     }
 })
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', async (req, res) => {
     Employee.findByIdAndDelete(req.params.id).then((employee) => {
         if(!employee) {
             return res.status(404).json({
@@ -133,7 +133,7 @@ router.delete('/:id', async (req, res, next) => {
     });
 })
 
-router.get('/get/count', async (req, res, next) => {
+router.get('/get/count', async (req, res) => {
     const totalEmployees = await Employee.count({});
 
     if(!totalEmployees) {
@@ -149,7 +149,7 @@ router.get('/get/count', async (req, res, next) => {
     })
 })
 
-router.post('/login', async (req, res, next) => {
+router.post('/login', async (req, res) => {
     const param = req.body;
 
     try {
@@ -167,7 +167,7 @@ router.post('/login', async (req, res, next) => {
 
             res.status(200).json({
                 success: true,
-                employee: employee.employeeId,
+                employeeId: employee._id,
                 token: token
             })
         } else {
@@ -185,5 +185,29 @@ router.post('/login', async (req, res, next) => {
         })
     }
 })
+
+router.get('/get/profile/:id', async (req, res) => {
+    try {
+        const employee = await Employee.findById(req.params.id).select('-password');
+        if(!employee) {
+            return res.status(404).json({
+                success: false,
+                message: 'Employee not found!',
+            })
+        }
+        res.json({
+            success: true,
+            employee: employee
+        })
+
+    } catch (error) {
+        console.log('error >>>', error)
+        return res.status(500).json({
+            success: false,
+            message: 'Can not get employee info!'
+        })
+    }
+})
+
 
 module.exports = router;

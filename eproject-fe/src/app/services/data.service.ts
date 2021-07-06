@@ -9,8 +9,8 @@ import { RestApiService } from './rest-api.service';
 export class DataService {
   message = '';
   messageType = 'danger';
-
-  employee!: Employee;
+  employee!: Employee | null;
+  url = 'http://localhost:3030/v1/api/accounts/get/profile';
 
   constructor(private router: Router, private rest: RestApiService) { 
     this.router.events.subscribe(event => {
@@ -18,6 +18,17 @@ export class DataService {
         this.message = '';
       }
     })
+  }
+  
+  async getProfile(id: string) {
+    try {
+      if(localStorage.getItem('token')) {
+        const data:any = await this.rest.get(this.url, id);
+        sessionStorage.setItem('userName', data.employee.name);
+      }
+    } catch (error) {
+      this.error(error);
+    }
   }
 
   error(message: string) {
