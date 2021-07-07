@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { Employee } from '../models/employee';
 import { RestApiService } from './rest-api.service';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -20,14 +19,14 @@ export class DataService {
     })
   }
   
-  async getProfile(id: string) {
+  async getProfile() {
     try {
-      if(localStorage.getItem('token')) {
-        const data:any = await this.rest.get(this.url, id);
-        sessionStorage.setItem('userName', data.employee.name);
+      if(localStorage.getItem('token') && localStorage.getItem('id')) {
+        const data:any = await this.rest.getProfile(this.url, localStorage.getItem('id'));
+        this.employee = data.employee;
       }
-    } catch (error) {
-      this.error(error);
+    } catch (res) {
+      throw new Error(res.error.message);
     }
   }
 

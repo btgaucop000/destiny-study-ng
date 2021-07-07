@@ -9,27 +9,14 @@ import { DataService } from './services/data.service';
 })
 export class AppComponent {
   title = 'eproject-fe';
-  userInfo: any;
-  isLogin = false;
 
   constructor(public data: DataService, private router: Router) {
-  }
-
-  ngOnInit(): void {
-    if(sessionStorage.getItem('userName')) {
-      this.isLogin = true;
-      this.userInfo = sessionStorage.getItem('userName');
-    } else {
-      this.router.navigate(['/']);
-    }
-    
+    this.data.getProfile();
   }
 
   logout() {
     this.data.employee = null;
-    this.isLogin = false;
     localStorage.clear();
-    sessionStorage.clear();
     this.router.navigate(['/login']);
   }
 }

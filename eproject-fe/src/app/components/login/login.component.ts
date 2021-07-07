@@ -32,13 +32,16 @@ export class LoginComponent implements OnInit {
     if (this.validate()) {
       this.rest.post(this.url, this.employee).then(async (data: any) => {
         localStorage.setItem('token', data.token);
-        await this.data.getProfile(data.employeeId);
-        this.data.success('Login successful');
-        this.btnDisable = false;
-        this.router.navigate(['/'])
-        .then(() => {
-          window.location.reload();
-        });
+        localStorage.setItem('id', data.employeeId);
+        await this.data.getProfile().then(() => {
+          this.data.success('Login successful');
+          this.btnDisable = false;
+          this.router.navigate(['/'])
+        })
+        .catch((error) => {
+          this.data.error(error);
+        })
+        
       })
       .catch(res => {
         this.data.error(res.error['message']);

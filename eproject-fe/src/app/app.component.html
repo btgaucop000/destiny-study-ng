@@ -11,17 +11,17 @@
                     <a class="nav-link" [routerLink]="['/']"><i class="fas fa-home"></i> Home
                         <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item" *ngIf="isLogin">
+                <li class="nav-item" *ngIf="data.employee">
                     <a class="nav-link" [routerLink]="['/employee-list']"><i class="fas fa-users"></i> Manage
                         Employees</a>
                 </li>
-                <li class="nav-item" *ngIf="isLogin">
+                <li class="nav-item" *ngIf="data.employee">
                     <a class="nav-link"><i class="fas fa-project-diagram"></i>Manage Project</a>
                 </li>
-                <li class="nav-item" *ngIf="isLogin">
+                <li class="nav-item" *ngIf="data.employee">
                     <a class="nav-link"><i class="fas fa-tasks"></i>Manage Tasks</a>
                 </li>
-                <li class="nav-item dropdown" *ngIf="isLogin">
+                <li class="nav-item dropdown" *ngIf="data.employee">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i>Manage Profile</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownId">
@@ -29,15 +29,15 @@
                         <a class="dropdown-item" href="#">View Profile</a>
                     </div>
                 </li>
-                <li class="nav-item" *ngIf="!isLogin">
+                <li class="nav-item" *ngIf="!data.employee">
                     <a class="nav-link" [routerLink]="['/login']">Login</a>
                 </li>
-                <li class="nav-item" *ngIf="isLogin">
+                <li class="nav-item" *ngIf="data.employee">
                     <a class="nav-link btn-logout" (click)="logout()">Logout</a>
                 </li>
             </ul>
-            <div class="lead" *ngIf="isLogin">
-                {{ userInfo }}
+            <div class="lead" *ngIf="data.employee">
+                {{ data.employee.name }}
             </div>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="text" placeholder="Search" />

@@ -51,4 +51,12 @@ export class RestApiService {
     }
     return this.http.delete(endpoint + '/' + id).toPromise();
   }
+
+  getProfile(endpoint: string, id: any) {
+    let headers = this.getHeaders();
+    if(headers instanceof HttpHeaders) {
+      return this.http.get(endpoint + '/' + id, {headers: headers}).toPromise();
+    }
+    return this.http.get(endpoint).toPromise();
+  }
 }
