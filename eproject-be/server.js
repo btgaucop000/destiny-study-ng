@@ -7,6 +7,7 @@ const cors = require('cors');
 const employeeRoutes = require('./routes/employee');
 const authJwt = require('./helpers/jwt');
 const errorHandler = require('./helpers/error-handler');
+const projectRoutes = require('./routes/project');
 
 const app = express();
 
@@ -27,6 +28,8 @@ app.use(authJwt());
 app.use(errorHandler);
 
 app.use(`${config.API}/accounts`, employeeRoutes);
+app.use(`${config.API}/projects`, projectRoutes);
+
 
 app.listen(config.PORT, err => {
     console.log('Listen on port ' + config.PORT);
