@@ -1,26 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { Employee } from 'src/app/models/employee';
+import { Project } from 'src/app/models/project';
 import { DataService } from 'src/app/services/data.service';
 import { RestApiService } from 'src/app/services/rest-api.service';
 
 @Component({
-  selector: 'app-employee-list',
-  templateUrl: './employee-list.component.html',
-  styleUrls: ['./employee-list.component.css']
+  selector: 'app-project-list',
+  templateUrl: './project-list.component.html',
+  styleUrls: ['./project-list.component.css']
 })
-export class EmployeeListComponent implements OnInit {
+export class ProjectListComponent implements OnInit {
 
-  employees! : Employee[];
-  url = 'http://localhost:3030/v1/api/accounts';
+  projects! : Project[];
+  url = 'http://localhost:3030/v1/api/projects';
 
   constructor(private rest: RestApiService, private data: DataService) { 
 
    }
 
   ngOnInit() {
-    this.rest.getAll(this.url).then((data: any) => {
-      this.employees = data.employees
-      this.data.success('Get list employee successful');
+    this.rest.getAll(this.url).then((res: any) => {
+      this.projects = res.data
+      this.data.success('Get list project successful');
     })
     .catch(res => {
       this.data.error(res.error['message']);

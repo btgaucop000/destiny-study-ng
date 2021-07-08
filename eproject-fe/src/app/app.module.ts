@@ -14,6 +14,9 @@ import { HomeComponent } from './components/home/home.component';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
 import { EmployeeEditComponent } from './components/employee-edit/employee-edit.component';
 import { LoginComponent } from './components/login/login.component';
+import { ProjectAddComponent } from './components/project-add/project-add.component';
+import { ProjectEditComponent } from './components/project-edit/project-edit.component';
+import { ProjectListComponent } from './components/project-list/project-list.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { LoginComponent } from './components/login/login.component';
     HomeComponent, 
     EmployeeListComponent,
     EmployeeEditComponent,
-    LoginComponent
+    LoginComponent,
+    ProjectAddComponent,
+    ProjectEditComponent,
+    ProjectListComponent
   ],
   imports: [
     BrowserModule,

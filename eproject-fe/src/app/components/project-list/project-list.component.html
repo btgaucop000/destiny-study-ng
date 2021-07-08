@@ -1,37 +1,41 @@
-<section id="employeeList">
+<section id="projectList">
   <div class="container p-2">
     <div class="row mt-2">
       <div class="col-8 offset-2">
         <!-- <app-message></app-message> -->
         <hr>
         <div class="btn-add">
-          <button class="btn btn-primary" [routerLink]="['/employee-add']">Add New Employee</button>
+          <button class="btn btn-primary" [routerLink]="['/project-add']">Add New Project</button>
         </div>
-        <div *ngIf="!employees" class="m-auto">
+        <div *ngIf="!projects" class="m-auto">
           <h1 class="text-center display-3 mt-5">
             <i class="fas fa-spinner fa-spin"></i>
           </h1>
         </div>
-        <div class="card bg-light" *ngIf="employees">
+        <div class="card bg-light" *ngIf="projects">
           <table class="table">
             <thead>
               <tr>
                 <th>No</th>
                 <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Budget</th>
+                <th>Expense</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of employees; let i = index">
+              <tr *ngFor="let item of projects; let i = index">
                 <td>{{ i + 1 }}</td>
                 <td>{{ item.name }}</td>
-                <td>{{ item.email }}</td>
-                <td>{{ item.role }}</td>
+                <td>{{ item.startDate | date }}</td>
+                <td>{{ item.endDate | date }}</td>
+                <td>{{ item.budget }}</td>
+                <td>{{ item.expense }}</td>
                 <td class="action-group">
                   View
-                  <a [routerLink]="['/employee-edit/' + item._id]" class="btn btn-outline-warning mr-2"><i class="fas fa-edit"></i></a> 
+                  <a [routerLink]="['/project-edit/' + item._id]" class="btn btn-outline-warning mr-2"><i class="fas fa-edit"></i></a> 
                   <a (click)="delete(item._id)" class="btn btn-outline-danger"><i class="fas fa-trash"></i></a>
                 </td>
               </tr>
