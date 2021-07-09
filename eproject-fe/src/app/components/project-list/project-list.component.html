@@ -2,10 +2,10 @@
   <div class="container p-2">
     <div class="row mt-2">
       <div class="col-8 offset-2">
-        <!-- <app-message></app-message> -->
+        <app-message></app-message>
         <hr>
         <div class="btn-add">
-          <button class="btn btn-primary" [routerLink]="['/project-add']">Add New Project</button>
+          <app-project-add (saveFinish)="finishAndAlert($event)"></app-project-add>
         </div>
         <div *ngIf="!projects" class="m-auto">
           <h1 class="text-center display-3 mt-5">

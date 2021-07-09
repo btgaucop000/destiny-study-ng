@@ -43,4 +43,9 @@ export class ProjectListComponent implements OnInit {
     })
   }
 
+  finishAndAlert(message: string) {
+    this.data.success(message);
+    this.ngOnInit();
+  }
+
 }
