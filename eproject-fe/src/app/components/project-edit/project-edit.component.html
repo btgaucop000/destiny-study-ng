@@ -1,3 +1,74 @@
-<p>
-  project-edit works!
-</p>
+<div id="project-edit">
+  <form #projectEditForm="ngForm">
+    <ng-template #content let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title text-center">Edit Project</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-message></app-message>
+        <div *ngIf="saving" class="m-auto">
+          <h1 class="text-center display-3 mt-5">
+            <i class="fas fa-spinner fa-spin"></i>
+          </h1>
+        </div>
+        <div>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" [(ngModel)]="project.name"
+              class="form-control" name="name" id="name" aria-describedby="nameHid" placeholder="Name">
+            <small *ngIf="false" id="nameHid" class="form-text text-muted">Name is required</small>
+          </div>
+          <div class="form-group">
+            <label for="team-size">Team Size</label>
+            <input type="number" [(ngModel)]="project.teamSize"
+              class="form-control" name="team-size" id="team-size" aria-describedby="sizeHid" placeholder="Team size">
+            <small *ngIf="false" id="sizeHid" class="form-text text-muted">Team size is required</small>
+          </div>
+          <div class="form-group">
+            <label for="budget">Budget</label>
+            <input type="number" [(ngModel)]="project.budget"
+              class="form-control" name="budget" id="budget" aria-describedby="budgetHid" placeholder="Budget">
+            <small *ngIf="false" id="budgetHid" class="form-text text-muted">Budget is required</small>
+          </div>
+          <div class="form-group">
+            <label for="expense">Expense</label>
+            <input type="number" [(ngModel)]="project.expense"
+              class="form-control" name="expense" id="expense" aria-describedby="expenseHid" placeholder="Expense">
+            <small *ngIf="false" id="expenseHid" class="form-text text-muted">Expense is required</small>
+          </div>
+          <div class="form-group">
+            <label for="start-date">Start Date</label>
+            <input type="date" [(ngModel)]="project.startDate"
+              class="form-control" name="start-date" id="start-date" aria-describedby="startHid" placeholder="Start Date">
+            <small *ngIf="false" id="startHid" class="form-text text-muted">Start Date is required</small>
+          </div>
+          <div class="form-group">
+            <label for="end-date">End Date</label>
+            <input type="date" [(ngModel)]="project.endDate"
+              class="form-control" name="end-date" id="end-date" aria-describedby="endHid" placeholder="End Date">
+            <small *ngIf="false" id="endHid" class="form-text text-muted">End Date is required</small>
+          </div>
+          <div class="form-group">
+            <label for="status">Status</label>
+            <select class="form-control" name="status" id="status" [(ngModel)]="project.status">
+              <option>Kickoff</option>
+              <option>Developing</option>
+              <option>Delivery</option>
+              <option>Closed</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-primary" (click)="update()">Update</button>
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+      </div>
+    </ng-template>
+    <button class="btn btn-lg btn-outline-primary" (click)="open(content)">
+      <i class="fas fa-edit"></i>
+    </button>
+  </form>
+</div>

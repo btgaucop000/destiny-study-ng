@@ -20,7 +20,7 @@ export class ProjectListComponent implements OnInit {
   ngOnInit() {
     this.rest.getAll(this.url).then((res: any) => {
       this.projects = res.data
-      this.data.success('Get list project successful');
+      // this.data.success('Get list project successful');
     })
     .catch(res => {
       this.data.error(res.error['message']);
