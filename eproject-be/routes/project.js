@@ -93,4 +93,26 @@ router.put('/:id', async (req, res) => {
     }
 })
 
+router.delete('/:id', async (req, res) => {
+    Project.findByIdAndRemove(req.params.id).then(project => {
+        if(!project) {
+            return res.status(404).json({
+                success: false,
+                message: 'Project not found!'
+            })
+        }
+    
+        return res.status(200).json({
+            success: true,
+            message: 'Project is deleted!'
+        })
+    }).catch((err) => {
+        console.log('error >>>', err)
+        return res.status(500).json({
+            success: false,
+            message: 'Something went wrong!',
+        })
+    });
+})
+
 module.exports = router;
